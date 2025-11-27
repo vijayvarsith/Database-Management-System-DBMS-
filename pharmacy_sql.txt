@@ -1,0 +1,29 @@
+CREATE DATABASE pharmacydb;
+USE pharmacydb;
+
+CREATE TABLE medicines (
+    med_id INT AUTO_INCREMENT PRIMARY KEY,
+    med_name VARCHAR(100) NOT NULL,
+    company VARCHAR(100),
+    price DECIMAL(10,2),
+    quantity INT,
+    expiry_date DATE
+);
+
+CREATE TABLE customers (
+    cust_id INT AUTO_INCREMENT PRIMARY KEY,
+    cust_name VARCHAR(100),
+    phone VARCHAR(15),
+    address VARCHAR(255)
+);
+
+CREATE TABLE sales (
+    sale_id INT AUTO_INCREMENT PRIMARY KEY,
+    cust_id INT,
+    med_id INT,
+    quantity INT,
+    total_price DECIMAL(10,2),
+    sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cust_id) REFERENCES customers(cust_id),
+    FOREIGN KEY (med_id) REFERENCES medicines(med_id)
+);
